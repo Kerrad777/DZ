@@ -1,8 +1,4 @@
 ---
-- name: (Handler) Systemd daemon-reload
-  ansible.builtin.systemd:
-    daemon_reload: true
-
 - name: (Handler) Start/reload NGINX
   ansible.builtin.service:
     name: nginx
