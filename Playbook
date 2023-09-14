@@ -1,0 +1,22 @@
+---
+- name: test1
+  hosts: 127.0.0.1
+  become: true
+  vars:
+    nginx_state: 'install'
+    nginx_amplify_enable: false
+    nginx_type: 'opensource'
+    nginx_modules: []
+    nginx_install_from: 'nginx_repository'
+    nginx_manage_repo: true
+    nginx_service_modify: false
+    nginx_logrotate_conf_enable: true
+  tasks:
+    - name: Include NGINX role on RedHat systems
+      include_role:
+        name: ansible-role-nginx
+      when: ansible_facts['os_family'] == "RedHat"
+  handlers:
+    - name: Run NGINX
+      systemd:
+        daemon_reload: true
